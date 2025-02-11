@@ -1,3 +1,6 @@
+using ReservationApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 internal class Program
 {
     private static void Main(string[] args)
