@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationApp.Data;
 using ReservationApp.Models;
@@ -40,6 +41,7 @@ namespace ReservationApp.Controllers
 
         // POST: api/Reservations
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
         {
             //collision check
@@ -61,6 +63,7 @@ namespace ReservationApp.Controllers
 
         // PUT: api/Reservations/id
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutReservation(int id, Reservation reservation)
         {
             if (id != reservation.Id)
@@ -94,6 +97,7 @@ namespace ReservationApp.Controllers
 
         // DELETE: api/Reservations/id
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteReservation(int id)
         {
             var reservation = await context.Reservations.FindAsync(id);
