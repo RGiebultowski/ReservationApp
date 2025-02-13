@@ -87,7 +87,7 @@ namespace ReservationApp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Rooms/5
+        // DELETE: api/Rooms/id
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
