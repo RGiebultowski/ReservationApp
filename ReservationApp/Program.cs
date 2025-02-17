@@ -1,5 +1,6 @@
-using ReservationApp.Data;
-using Microsoft.EntityFrameworkCore;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 internal class Program
 {
@@ -8,6 +9,24 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        var jwtKey = builder.Configuration["Jwt:Key"];
+        
+        if (string.IsNullOrEmpty(jwtKey))
+            throw new ArgumentNullException("JTW Key is missing!");
+
+        var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtKey));
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = key,
+            ValidateIssuer = false,
+            ValidateAudience = false 
+        };
+        });
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
