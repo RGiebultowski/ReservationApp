@@ -32,14 +32,15 @@ namespace ReservationApp.Data
         }
 
         //create new user
-        public async Task<User> CreateNewUser(string name, string password, bool isAdmin)
+        public async Task<User> CreateNewUser(string name, string password, string email, bool isAdmin)
         {
             var hashedPassword = ApplicationDbContext.HashPassword(password);
 
-            var user = new User
+            User user = new User
             {
                 Name = name,
                 PasswordHash = hashedPassword,
+                Email = email,
                 IsAdministrator = isAdmin
             };
 

@@ -53,7 +53,7 @@ namespace ReservationApp.Controllers
                 reservation.StartTime < room.EndTime);
 
             if (conflict)
-                return BadRequest($"In this time room {reservation.RoomId.Name} is reserved.");
+                return BadRequest($"In this time room {reservation.Room.Name} is reserved.");
             else
                 context.Reservations.Add(reservation);
             await context.SaveChangesAsync();
@@ -77,7 +77,7 @@ namespace ReservationApp.Controllers
                 reservation.StartTime < r.EndTime);
 
             if (conflict)
-                return BadRequest($"In this time room {reservation.RoomId.Name} is reserved.");
+                return BadRequest($"In this time room {reservation.Room.Name} is reserved.");
 
             context.Entry(reservation).State = EntityState.Modified;
 

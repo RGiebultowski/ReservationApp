@@ -11,6 +11,9 @@ namespace ReservationApp.Models
         [MinLength(5, ErrorMessage = "Password needs 5 chars!")]
         public string Password { get; set; }
 
+        [Required]
+        public string Email { get; set; }
+
         public bool IsAdmin { get; set; } = false;
     }
 }

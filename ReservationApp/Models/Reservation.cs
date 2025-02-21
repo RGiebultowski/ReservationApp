@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReservationApp.Models
 {
@@ -7,7 +8,10 @@ namespace ReservationApp.Models
         public int Id { get; set; }
 
         [Required]
-        public Room RoomId { get; set; }
+        public int RoomId { get; set; }
+
+        [ForeignKey("RoomId")]
+        public Room Room { get; set; }
 
         [Required]
         public DateTime StartTime { get; set; }

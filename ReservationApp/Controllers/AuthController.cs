@@ -18,7 +18,7 @@ namespace ReservationApp.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUser newUser)
         {
-            var user = await authService.CreateNewUser(newUser.Name, newUser.Password, newUser.IsAdmin);
+            var user = await authService.CreateNewUser(newUser.Name, newUser.Password, newUser.Email, newUser.IsAdmin);
             return Ok(user);
         }
 
